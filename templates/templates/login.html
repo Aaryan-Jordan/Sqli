@@ -1,0 +1,48 @@
+<style>
+  body {
+    background-image: url("https://wallpaperaccess.com/full/19924.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+
+  form {
+    position: relative;
+    top: 150px;
+  }
+</style>
+<form action="auth" method="post" style="color: green;">
+  <label for="username" style="color: green;">Username:</label>
+  <input type="text" id="username" name="username" style="color: green;">
+  <br>
+  <br>
+  <label for="password" style="color: green;">Password:</label>
+  <input type="password" id="password" name="password" style="color: green;">
+  <br>
+  <br>
+  <input type="submit" value="Login" style="color: green;">
+  <br>
+  <br>
+  <span id="input-preview" style="color: green;"></span>
+</form>
+
+<script>
+  const usernameInput = document.getElementById('username');
+  const passwordInput = document.getElementById('password');
+  const inputPreview = document.getElementById('input-preview');
+  
+  usernameInput.addEventListener('input', () => {
+    inputPreview.textContent = `Query: SELECT * FROM cred WHERE username='${usernameInput.value}'`;
+    if (passwordInput.value) {
+      inputPreview.textContent += ` AND password='${passwordInput.value}'`;
+    }
+  });
+  
+  passwordInput.addEventListener('input', () => {
+    if (usernameInput.value) {
+      inputPreview.textContent = `Query: SELECT * FROM cred WHERE username='${usernameInput.value}' AND password='${passwordInput.value}'`;
+    } else {
+      inputPreview.textContent = ` AND password='${passwordInput.value}'`;
+    }
+  });
+</script>
